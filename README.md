@@ -4,7 +4,7 @@ Tinder style swipe cards
 
 ## Usage
 
-Install react-swipe-card first
+Install
 
 ```bash
  $ npm install react-swipe-card -save
