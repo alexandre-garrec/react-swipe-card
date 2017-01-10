@@ -1,0 +1,20 @@
+{
+  "name": "react-swipe-card",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.2",
+    "react-addons": "^0.9.1-deprecated"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
