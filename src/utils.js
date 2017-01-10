@@ -8,4 +8,3 @@ export const translate3d = (x, y) => {
   }
 }
 
-export const backgroundImage = url => `url("images/${url}")`

@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@kadira/storybook": "^2.35.2",
+    "@kadira/storybook": "^2.35.2"
   },
   "dependencies": {
     "hammerjs": "^2.0.8",

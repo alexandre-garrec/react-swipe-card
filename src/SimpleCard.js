@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { translate3d, backgroundImage } from './utils'
+import { translate3d } from './utils'
 
 class Card extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      initialPosition: { x: 0, y: 0 }
-    }
+    this.state = { initialPosition: { x: 0, y: 0 } }
     this.setInitialPosition = this.setInitialPosition.bind(this)
   }
   setInitialPosition () {
-    const screen = document.getElementById('master-root')
     const card = ReactDOM.findDOMNode(this)
-
     const initialPosition = {
-      x: Math.round((screen.offsetWidth - card.offsetWidth) / 2),
-      y: Math.round((screen.offsetHeight - card.offsetHeight) / 2)
+      x: Math.round((this.props.containerSize.x - card.offsetWidth) / 2),
+      y: Math.round((this.props.containerSize.y - card.offsetHeight) / 2)
     }
-
     this.setState({ initialPosition })
   }
 
@@ -37,14 +32,12 @@ class Card extends Component {
     var style = {
       ...translate3d(x, y),
       zIndex: this.props.index,
-      backgroundImage: backgroundImage(this.props.image),
       ...this.props.style
     }
 
     return (
       <div style={style} className={`${this.props.className} card`}>
-        <h1>{this.props.title}</h1>
-        <p>{this.props.text}</p>
+        {this.props.children}
       </div>
     )
   }

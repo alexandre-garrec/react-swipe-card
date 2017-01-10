@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Hammer from 'hammerjs'
 import ReactDOM from 'react-dom'
-import Card from './Card'
+import SimpleCard from './SimpleCard'
 import { translate3d } from './utils'
 
 class DraggableCard extends Component {
@@ -15,14 +15,15 @@ class DraggableCard extends Component {
       animation: null
     }
     this.resetPosition = this.resetPosition.bind(this)
+    this.handlePan = this.handlePan.bind(this)
   }
   resetPosition () {
-    const screen = document.getElementById('master-root')
+    const { x, y } = this.props.containerSize
     const card = ReactDOM.findDOMNode(this)
 
     const initialPosition = {
-      x: Math.round((screen.offsetWidth - card.offsetWidth) / 2),
-      y: Math.round((screen.offsetHeight - card.offsetHeight) / 2)
+      x: Math.round((x - card.offsetWidth) / 2),
+      y: Math.round((y - card.offsetHeight) / 2)
     }
 
     this.setState({
@@ -34,21 +35,19 @@ class DraggableCard extends Component {
   }
   
   panstart () {
+    const { x, y } = this.state
     this.setState({
       animation: false,
-      startPosition: {
-        x: this.state.x,
-        y: this.state.y
-      }
+      startPosition: { x, y }
     })
   }
   panend (ev) {
-    const screen = document.getElementById('master-root')
+    const screen = this.props.containerSize
     const card = ReactDOM.findDOMNode(this)
     if (this.state.x < -50) {
-      this.props.onOutScreenLeft(this.props.cardId)
-    } else if ((this.state.x + (card.offsetWidth - 50)) > screen.offsetWidth) {
-      this.props.onOutScreenRight(this.props.cardId)
+      this.props.onOutScreenLeft(this.props.index)
+    } else if ((this.state.x + (card.offsetWidth - 50)) > screen.x) {
+      this.props.onOutScreenRight(this.props.index)
     } else {
       this.resetPosition()
       this.setState({ animation: true })
@@ -57,7 +56,7 @@ class DraggableCard extends Component {
   panmove (ev) {
     this.setState(this.calculatePosition( ev.deltaX, ev.deltaY ))
   }
-  pancancel = (ev) => {
+  pancancel (ev) {
     console.log(ev.type)
   }
 
@@ -80,33 +79,26 @@ class DraggableCard extends Component {
   }
   componentDidMount () {
     this.hammer = new Hammer.Manager(ReactDOM.findDOMNode(this))
-    this.hammer.add(new Hammer.Pan({threshold: 2}))
+    this.hammer.add(new Hammer.Pan({ threshold: 2 }))
 
-    const events = [
-      ['panstart panend pancancel panmove', this.handlePan],
-      ['swipestart swipeend swipecancel swipemove', this.handleSwipe]
-    ]
-
-    events.forEach((data) => {
-      if (data[0] && data[1]) {
-        this.hammer.on(data[0], (ev) => data[1].call(this, ev))
-      }
-    })
+    this.hammer.on('panstart panend pancancel panmove', this.handlePan)
+    this.hammer.on('swipestart swipeend swipecancel swipemove', this.handleSwipe)
 
     this.resetPosition()
     window.addEventListener('resize', this.resetPosition)
   }
   componentWillUnmount () {
-    this.hammer.stop()
-    this.hammer.destroy()
-    this.hammer = null
-
+    if (this.hammer) {
+      this.hammer.stop()
+      this.hammer.destroy()
+      this.hammer = null
+    }
     window.removeEventListener('resize', this.resetPosition)
   }
   render () {
     const { x, y, animation } = this.state
     const style = translate3d(x, y)
-    return <Card {...this.props} style={style} className={animation ? 'animate' : '' } />
+    return <SimpleCard {...this.props} style={style} className={animation ? 'animate' : '' } />
   }
 }
 

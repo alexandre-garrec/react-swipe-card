@@ -22,11 +22,11 @@ li {
   list-style: none;
 }
 
-h1 {
+h1, h2 {
   font-weight: 500;
 }
 
-#master-root {
+.master-root {
   margin: 20px auto;
   position: relative;
   min-height: 300px;
