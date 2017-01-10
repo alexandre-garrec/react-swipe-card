@@ -10,7 +10,6 @@
   "license": "ISC",
   "devDependencies": {
     "@kadira/storybook": "^2.35.2",
-    "react-addons": "^0.9.1-deprecated"
   },
   "dependencies": {
     "hammerjs": "^2.0.8",

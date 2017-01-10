@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import Cards from '../src/index'
+import Cards, { Container } from '../src/index'
 import './style.css'
 
 var data = [
@@ -11,7 +11,7 @@ var data = [
 
 storiesOf('Tinder card', module)
   .add('with text', () => (
-    <div id='master-root'>
+    <Container>
       <Cards initialCardsData={data} />
-    </div>
+    </Container>
   ))
