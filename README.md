@@ -2,6 +2,10 @@
 Tinder style swipe cards
 
 
+## Demo
+
+![GIF react-swipe-card](http://g.recordit.co/WBvhHUoJ1l.gif)
+
 ## Usage
 
 Install

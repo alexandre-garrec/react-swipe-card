@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "start": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "build": "rm -rf dist && mkdir dist && babel -d dist src",
     "copy:package": "cp -R package.json dist/",
