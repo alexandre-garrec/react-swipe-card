@@ -14,11 +14,14 @@ class SwipeCards extends Component {
     this.setSize = this.setSize.bind(this)
   }
   removeCard (side, cardId) {
+    const {children, } = this.props
     setTimeout(() => {
       if (side === 'left') this.setState({ alertLeft: false })
       else if (side === 'right') this.setState({ alertRight: false })
     }, 300)
-
+    
+    if (children.length === (this.state.index + 1) && this.props.onEnd) this.props.onEnd()
+    
     this.setState({
       index: this.state.index + 1,
       alertLeft: side === 'left',
@@ -46,9 +49,10 @@ class SwipeCards extends Component {
   render () {
     const { alertLeft, alertRight, index, containerSize } = this.state
     const { children, className } = this.props
+    if (!containerSize.x || !containerSize.y) return  <div className={className} />
 
     const _cards = children.reduce((memo, c, i) => {
-      if (index > i || !containerSize.x || !containerSize.y) return memo
+      if (index > i) return memo
       const props = {
         key: i,
         containerSize,
@@ -59,6 +63,7 @@ class SwipeCards extends Component {
       }
       return [ cloneElement(c, props), ...memo ]
     }, [])
+
     return (
       <div className={className}>
         <div className={`${alertLeft ? 'alert-visible': ''} alert-left alert`} />

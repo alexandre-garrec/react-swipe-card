@@ -47,8 +47,10 @@ class DraggableCard extends Component {
     const screen = this.props.containerSize
     const card = ReactDOM.findDOMNode(this)
     if (this.state.x < -50) {
+      if (this.props.onSwipeLeft) this.props.onSwipeLeft()
       this.props.onOutScreenLeft(this.props.index)
     } else if ((this.state.x + (card.offsetWidth - 50)) > screen.x) {
+      if (this.props.onSwipeRight) this.props.onSwipeRight()
       this.props.onOutScreenRight(this.props.index)
     } else {
       this.resetPosition()
