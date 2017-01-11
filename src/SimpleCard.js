@@ -28,7 +28,7 @@ class Card extends Component {
 
   render () {
     const { initialPosition: { x, y } } = this.state
-
+    const { className = 'inactive' } = this.props
     var style = {
       ...translate3d(x, y),
       zIndex: this.props.index,
@@ -36,7 +36,7 @@ class Card extends Component {
     }
 
     return (
-      <div style={style} className={`${this.props.className} card`}>
+      <div style={style} className={`card ${className}`}>
         {this.props.children}
       </div>
     )

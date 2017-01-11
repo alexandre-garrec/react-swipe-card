@@ -44,11 +44,18 @@ h1, h2 {
   height: 200px;
   width: 180px;
   margin: 0 auto;
-  border-radius: 3px;
+  transition: box-shadow .3s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  cursor: pointer;
 }
 
 .animate {
   transition: transform .3s;
+  box-shadow: none;
+}
+
+.inactive {
+  box-shadow: none;
 }
 
 .alert {
