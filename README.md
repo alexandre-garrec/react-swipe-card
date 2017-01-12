@@ -1,6 +1,8 @@
 # react-swipe-card
 Tinder style swipe cards
 
+[![npm](https://img.shields.io/npm/v/style-set.svg?style=flat-square)](https://www.npmjs.com/package/react-swipe-card)
+
  - [Usage](#usage)
  - [Demo](#demo)
  - [Code](#code)
@@ -16,6 +18,7 @@ Install
 
 
 ## Demo
+
 [Demo](https://alexandre-garrec.github.io/react-swipe-card/)
 
 ## Code
