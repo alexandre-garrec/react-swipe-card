@@ -18,9 +18,6 @@ Install
 ## Demo
 [Demo](https://alexandre-garrec.github.io/react-swipe-card/)
 
-![GIF react-swipe-card](http://g.recordit.co/WBvhHUoJ1l.gif = 250x)
-
-
 ## Code
 
 ```javascript
