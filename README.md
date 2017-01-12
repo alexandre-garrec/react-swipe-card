@@ -1,6 +1,11 @@
 # react-swipe-card
 Tinder style swipe cards
 
+ - [Usage](#usage)
+ - [Demo](#demo)
+ - [Code](#code)
+ - [Components](#components)
+
 ## Usage
 
 Install
@@ -11,8 +16,9 @@ Install
 
 
 ## Demo
+[Demo](https://alexandre-garrec.github.io/react-swipe-card/)
 
-![GIF react-swipe-card](http://g.recordit.co/WBvhHUoJ1l.gif)
+![GIF react-swipe-card](http://g.recordit.co/WBvhHUoJ1l.gif = 250x)
 
 
 ## Code
@@ -38,3 +44,19 @@ const Wrapper = () => {
   )
 }
 ```
+
+## Components
+
+Cards
+---
+Props
+
+ - className: string
+ - onEnd: function
+
+Card
+---
+props
+
+ - onSwipeLeft: function
+ - onSwipeRight: function
