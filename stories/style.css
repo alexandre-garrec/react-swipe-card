@@ -60,7 +60,7 @@ h1, h2 {
 
 .alert {
   width: 45%;
-  height: 10%;
+  min-height: 10%;
   position: absolute;
   top: 0;
   z-index: 9999;

@@ -66,8 +66,12 @@ class SwipeCards extends Component {
 
     return (
       <div className={className}>
-        <div className={`${alertLeft ? 'alert-visible': ''} alert-left alert`} />
-        <div className={`${alertRight ? 'alert-visible': ''} alert-right alert`} />
+        <div className={`${alertLeft ? 'alert-visible': ''} alert-left alert`}>
+          {this.props.alertLeft}
+        </div>
+        <div className={`${alertRight ? 'alert-visible': ''} alert-right alert`}>
+          {this.props.alertRight}
+        </div>
         <div id='cards'>
           {_cards}
         </div>

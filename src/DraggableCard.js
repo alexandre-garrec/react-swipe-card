@@ -84,7 +84,7 @@ class DraggableCard extends Component {
   componentDidMount () {
     this.hammer = new Hammer.Manager(ReactDOM.findDOMNode(this))
     this.hammer.add(new Hammer.Pan({ threshold: 2 }))
-
+    
     this.hammer.on('panstart panend pancancel panmove', this.handlePan)
     this.hammer.on('swipestart swipeend swipecancel swipemove', this.handleSwipe)
 

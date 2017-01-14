@@ -54,6 +54,8 @@ Props:
 
  - className: string
  - onEnd: function
+ - alertRight: component
+ - alertLeft: component
 
 Card
 ---

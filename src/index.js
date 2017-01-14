@@ -1,12 +1,5 @@
-import React, { Component, cloneElement, createElement } from 'react'
-import ReactDOM from 'react-dom'
-import DraggableCard from './DraggableCard'
-import SimpleCard from './SimpleCard'
-import SwipeCards from './SwipeCards'
+import Cards from './Cards'
 
-export const Card = ({ active = false, ...props }) => {
-  const component = active ? DraggableCard : SimpleCard
-  return createElement(component, props)
-}
+export Card from './CardSwitcher'
 
-export default SwipeCards
+export default Cards
