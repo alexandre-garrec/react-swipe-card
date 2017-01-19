@@ -41,7 +41,6 @@ const Wrapper = () => {
           </Card>
         )}
       </Cards>
-    </Cards>
   )
 }
 ```
