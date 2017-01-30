@@ -32,7 +32,9 @@ storiesOf('Tinder card', module)
         onEnd={action('end')}
         className='master-root'>
         {data.map(item => 
-          <Card>
+          <Card
+              onSwipeLeft={action('swipe left')}
+              onSwipeRight={action('swipe right')}>
             <h2>{item}</h2>
           </Card>
         )}

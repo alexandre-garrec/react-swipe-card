@@ -46,22 +46,26 @@ class DraggableCard extends Component {
   panend (ev) {
     const screen = this.props.containerSize
     const card = ReactDOM.findDOMNode(this)
-     if (this.state.x < -50) {
-      if (this.props.onSwipeLeft) this.props.onSwipeLeft()
-      this.props.onOutScreenLeft(this.props.index)
-    } else if ((this.state.x + (card.offsetWidth - 50)) > screen.x) {
-      if (this.props.onSwipeRight) this.props.onSwipeRight()
-      this.props.onOutScreenRight(this.props.index)
-    } else if (this.state.y < -50) {
-      if (this.props.onSwipeTop) this.props.onSwipeTop()
-      this.props.onOutScreenTop(this.props.index)
-    } else if ((this.state.y + (card.offsetHeight - 50)) > screen.y) {
-      if (this.props.onSwipeBottom) this.props.onSwipeBottom()
-      this.props.onOutScreenBottom(this.props.index)
+
+    const getDirection = () => {
+      switch (true) {
+        case (this.state.x < -50): return 'Left'
+        case (this.state.x + (card.offsetWidth - 50) > screen.x): return 'Right'
+        case (this.state.y < -50): return 'Top'
+        case (this.state.y + (card.offsetHeight - 50) > screen.y): return 'Bottom'
+        default: return false
+      }
+    }
+    const direction = getDirection()
+
+    if (this.props[`onSwipe${direction}`]) {
+      this.props[`onSwipe${direction}`]()
+      this.props[`onOutScreen${direction}`](this.props.index)
     } else {
       this.resetPosition()
       this.setState({ animation: true })
     }
+
   }
   panmove (ev) {
     this.setState(this.calculatePosition( ev.deltaX, ev.deltaY ))
