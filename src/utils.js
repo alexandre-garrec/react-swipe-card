@@ -7,3 +7,5 @@ export const translate3d = (x, y) => {
     transform: translate
   }
 }
+
+export const DIRECTIONS = [ 'Right', 'Left', 'Top', 'Bottom' ]

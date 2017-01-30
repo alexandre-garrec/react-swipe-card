@@ -1,6 +1,6 @@
 import React, { Component, cloneElement } from 'react'
 import ReactDOM from 'react-dom'
-import { capitalizeFirstLetter } from './utils'
+import { DIRECTIONS } from './utils'
 
 class SwipeCards extends Component {
   constructor (props) {
@@ -46,7 +46,7 @@ class SwipeCards extends Component {
   }
 
   render () {
-    const { alertTop, alertBottom, alertLeft, alertRight, index, containerSize } = this.state
+    const { index, containerSize } = this.state
     const { children, className, onSwipeTop, onSwipeBottom } = this.props
     if (!containerSize.x || !containerSize.y) return  <div className={className} />
 
@@ -56,29 +56,20 @@ class SwipeCards extends Component {
         key: i,
         containerSize,
         index: children.length - index,
-        onOutScreenLeft: () => this.removeCard('Left'),
-        onOutScreenRight: () => this.removeCard('Right'),
-        onOutScreenTop: () => this.removeCard('Top'),
-        onOutScreenBottom: () => this.removeCard('Bottom'),
+        ...DIRECTIONS.reduce((m, d) => 
+          ({ ...m, [`onOutScreen${d}`]: () => this.removeCard(d) }), {}),
         active: index === i
       }
       return [ cloneElement(c, props), ...memo ]
     }, [])
-
+    
     return (
       <div className={className}>
-        <div className={`${alertLeft ? 'alert-visible': ''} alert-left alert`}>
-          {this.props.alertLeft}
-        </div>
-        <div className={`${alertRight ? 'alert-visible': ''} alert-right alert`}>
-          {this.props.alertRight}
-        </div>
-        <div className={`${alertTop ? 'alert-visible': ''} alert-top alert`}>
-          {this.props.alertTop}
-        </div>
-        <div className={`${alertBottom ? 'alert-visible': ''} alert-bottom alert`}>
-          {this.props.alertBottom}
-        </div>
+        {DIRECTIONS.map(d => 
+          <div className={`${this.state[`alert${d}`] ? 'alert-visible': ''} alert-${d.toLowerCase()} alert`}>
+            {this.props[`alert${d}`]}
+          </div>
+        )}
         <div id='cards'>
           {_cards}
         </div>

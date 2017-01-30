@@ -85,7 +85,6 @@ class DraggableCard extends Component {
   }
 
   calculatePosition (deltaX, deltaY) {
-    console.log({deltaX, deltaY})
     const { initialPosition : { x, y } } = this.state
     return {
       x: (x + deltaX),
