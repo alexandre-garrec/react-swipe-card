@@ -7,4 +7,3 @@ export const translate3d = (x, y) => {
     transform: translate
   }
 }
-

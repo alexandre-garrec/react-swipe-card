@@ -46,12 +46,18 @@ class DraggableCard extends Component {
   panend (ev) {
     const screen = this.props.containerSize
     const card = ReactDOM.findDOMNode(this)
-    if (this.state.x < -50) {
+     if (this.state.x < -50) {
       if (this.props.onSwipeLeft) this.props.onSwipeLeft()
       this.props.onOutScreenLeft(this.props.index)
     } else if ((this.state.x + (card.offsetWidth - 50)) > screen.x) {
       if (this.props.onSwipeRight) this.props.onSwipeRight()
       this.props.onOutScreenRight(this.props.index)
+    } else if (this.state.y < -50) {
+      if (this.props.onSwipeTop) this.props.onSwipeTop()
+      this.props.onOutScreenTop(this.props.index)
+    } else if ((this.state.y + (card.offsetHeight - 50)) > screen.y) {
+      if (this.props.onSwipeBottom) this.props.onSwipeBottom()
+      this.props.onOutScreenBottom(this.props.index)
     } else {
       this.resetPosition()
       this.setState({ animation: true })
@@ -75,6 +81,7 @@ class DraggableCard extends Component {
   }
 
   calculatePosition (deltaX, deltaY) {
+    console.log({deltaX, deltaY})
     const { initialPosition : { x, y } } = this.state
     return {
       x: (x + deltaX),

@@ -39,3 +39,19 @@ storiesOf('Tinder card', module)
       </Cards>
     </div>
   ))
+  .add('all swipe directions', () => (
+    <div>
+      <h1>react swipe card</h1>
+      <Cards onEnd={action('end')} className='master-root'>
+        {data.map(item => 
+          <Card 
+            onSwipeTop={action('swipe top')} 
+            onSwipeBottom={action('swipe bottom')}
+            onSwipeLeft={action('swipe left')} 
+            onSwipeRight={action('swipe right')}>
+            <h2>{item}</h2>
+          </Card>
+        )}
+      </Cards>
+    </div>
+  ))
