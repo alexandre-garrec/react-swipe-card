@@ -8,3 +8,4 @@ export const translate3d = (x, y) => {
   }
 }
 
+export const DIRECTIONS = [ 'Right', 'Left', 'Top', 'Bottom' ]

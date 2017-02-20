@@ -55,6 +55,8 @@ Props:
  - onEnd: function
  - alertRight: component
  - alertLeft: component
+ - alertTop: component
+ - alertBottom: component
 
 Card
 ---
@@ -62,6 +64,8 @@ Props:
 
  - onSwipeLeft: function
  - onSwipeRight: function
+ - onSwipeTop: function
+ - onSwipeBottom: function
 
 ## License
 
