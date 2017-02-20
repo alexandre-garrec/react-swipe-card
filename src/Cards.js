@@ -1,5 +1,6 @@
 import React, { Component, cloneElement } from 'react'
 import ReactDOM from 'react-dom'
+import { DIRECTIONS } from './utils'
 
 class SwipeCards extends Component {
   constructor (props) {
@@ -8,24 +9,22 @@ class SwipeCards extends Component {
       index: 0,
       alertLeft: false,
       alertRight: false,
+      alertTop: false,
+      alertBottom: false,
       containerSize: { x: 0, y: 0 }
     }
     this.removeCard = this.removeCard.bind(this)
     this.setSize = this.setSize.bind(this)
   }
   removeCard (side, cardId) {
-    const {children, } = this.props
-    setTimeout(() => {
-      if (side === 'left') this.setState({ alertLeft: false })
-      else if (side === 'right') this.setState({ alertRight: false })
-    }, 300)
+    const { children, onEnd } = this.props
+    setTimeout(() => this.setState({ [`alert${side}`]: false }), 300)
     
-    if (children.length === (this.state.index + 1) && this.props.onEnd) this.props.onEnd()
-    
+    if (children.length === (this.state.index + 1) && onEnd) onEnd()
+
     this.setState({
       index: this.state.index + 1,
-      alertLeft: side === 'left',
-      alertRight: side === 'right'
+      [`alert${side}`]: true
     })
   }
   
@@ -47,8 +46,8 @@ class SwipeCards extends Component {
   }
 
   render () {
-    const { alertLeft, alertRight, index, containerSize } = this.state
-    const { children, className } = this.props
+    const { index, containerSize } = this.state
+    const { children, className, onSwipeTop, onSwipeBottom } = this.props
     if (!containerSize.x || !containerSize.y) return  <div className={className} />
 
     const _cards = children.reduce((memo, c, i) => {
@@ -57,21 +56,20 @@ class SwipeCards extends Component {
         key: i,
         containerSize,
         index: children.length - index,
-        onOutScreenLeft: () => this.removeCard('left'),
-        onOutScreenRight: () => this.removeCard('right'),
+        ...DIRECTIONS.reduce((m, d) => 
+          ({ ...m, [`onOutScreen${d}`]: () => this.removeCard(d) }), {}),
         active: index === i
       }
       return [ cloneElement(c, props), ...memo ]
     }, [])
-
+    
     return (
       <div className={className}>
-        <div className={`${alertLeft ? 'alert-visible': ''} alert-left alert`}>
-          {this.props.alertLeft}
-        </div>
-        <div className={`${alertRight ? 'alert-visible': ''} alert-right alert`}>
-          {this.props.alertRight}
-        </div>
+        {DIRECTIONS.map(d => 
+          <div className={`${this.state[`alert${d}`] ? 'alert-visible': ''} alert-${d.toLowerCase()} alert`}>
+            {this.props[`alert${d}`]}
+          </div>
+        )}
         <div id='cards'>
           {_cards}
         </div>
