@@ -13,8 +13,9 @@ storiesOf('Tinder card', module)
     <div>
       <h1>react swipe card</h1>
       <Cards onEnd={action('end')} className='master-root'>
-        {data.map(item => 
+        {data.map((item, key) => 
           <Card 
+            key={key}
             onSwipeLeft={action('swipe left')} 
             onSwipeRight={action('swipe right')}>
             <h2>{item}</h2>
@@ -26,13 +27,14 @@ storiesOf('Tinder card', module)
   .add('custom alert', () => (
     <div>
       <h1>react swipe card</h1>
-      <Cards 
+      <Cards
         alertRight={<CustomAlertRight />} 
         alertLeft={<CustomAlertLeft />} 
         onEnd={action('end')}
         className='master-root'>
-        {data.map(item => 
+        {data.map((item, key) => 
           <Card
+              key={key}
               onSwipeLeft={action('swipe left')}
               onSwipeRight={action('swipe right')}>
             <h2>{item}</h2>
@@ -45,8 +47,9 @@ storiesOf('Tinder card', module)
     <div>
       <h1>react swipe card</h1>
       <Cards onEnd={action('end')} className='master-root'>
-        {data.map(item => 
+        {data.map((item, key) => 
           <Card 
+            key={key}
             onSwipeTop={action('swipe top')} 
             onSwipeBottom={action('swipe bottom')}
             onSwipeLeft={action('swipe left')} 
