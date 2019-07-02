@@ -113,7 +113,11 @@ class DraggableCard extends Component {
   render () {
     const { x, y, animation, pristine, className } = this.state
     const style = translate3d(x, y)
-    return <SimpleCard {...this.props} style={style} className={className + ' ' + animation ? 'animate' : pristine ? 'inactive' : '' } />
+    return <SimpleCard
+            {...this.props}
+            style={style}
+            className={[className, animation ? 'animate' : pristine ? 'inactive' : '' ].join(' ')}
+    />
   }
 }
 
