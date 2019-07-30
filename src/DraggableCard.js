@@ -13,7 +13,8 @@ class DraggableCard extends Component {
       initialPosition: { x: 0, y: 0 },
       startPosition: { x: 0, y: 0 },
       animation: null,
-      pristine: true
+      pristine: true,
+      className: this.props.className || ''
     }
     this.resetPosition = this.resetPosition.bind(this)
     this.handlePan = this.handlePan.bind(this)
@@ -110,9 +111,13 @@ class DraggableCard extends Component {
     window.removeEventListener('resize', this.resetPosition)
   }
   render () {
-    const { x, y, animation, pristine } = this.state
+    const { x, y, animation, pristine, className } = this.state
     const style = translate3d(x, y)
-    return <SimpleCard {...this.props} style={style} className={animation ? 'animate' : pristine ? 'inactive' : '' } />
+    return <SimpleCard
+            {...this.props}
+            style={style}
+            className={[className, animation ? 'animate' : pristine ? 'inactive' : '' ].join(' ')}
+    />
   }
 }
 
